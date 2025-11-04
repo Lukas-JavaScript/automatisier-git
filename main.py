@@ -2,6 +2,16 @@ from os import system
 import subprocess
 
 while True:
+    init = input('Do you want to init?(y/n)(default:y): ').lower()
+    if init == '' or init == 'y':
+        system('git init')
+        break
+    elif init == "n":
+        break
+    else:
+        print('Answer only with y or n.')
+
+while True:
     push = input('Do you want to push it after every modifire?(y/n)(default:y): ').lower()
     if push == '' or push == 'y':
         push = True
@@ -12,9 +22,6 @@ while True:
     else:
         print('Answer only with y or n.')
 
-init = input('Do you want to init?(y/n)(default:y): ').lower()
-if init == '' or init == 'y':
-    system('git init')
 def safe_run(command):
     try:
         subprocess.run(command, check=True)
