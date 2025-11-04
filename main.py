@@ -1,10 +1,15 @@
-from os import system
 import subprocess
 
+def safe_run(command):
+    try:
+        subprocess.run(command, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to execute command: {command}")
+        print(f"Details: {e}")
 while True:
     init = input('Do you want to init?(y/n)(default:y): ').lower()
     if init == '' or init == 'y':
-        system('git init')
+        safe_run('git init')
         break
     elif init == "n":
         break
@@ -21,13 +26,6 @@ while True:
         break
     else:
         print('Answer only with y or n.')
-
-def safe_run(command):
-    try:
-        subprocess.run(command, check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to execute command: {command}")
-        print(f"Details: {e}")
 
 def main():
     while True:
